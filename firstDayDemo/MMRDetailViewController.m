@@ -9,7 +9,7 @@
 #import "MMRDetailViewController.h"
 
 @interface MMRDetailViewController ()
-
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @end
 
 @implementation MMRDetailViewController
@@ -27,6 +27,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.nameLabel.text = [NSString stringWithFormat:@"You clicked %@",self.name];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationItem.title = self.name; 
 }
 
 - (void)didReceiveMemoryWarning

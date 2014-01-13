@@ -21,6 +21,7 @@
 		3E9EB979188460C500111188 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9EB95B188460C500111188 /* UIKit.framework */; };
 		3E9EB981188460C500111188 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E9EB97F188460C500111188 /* InfoPlist.strings */; };
 		3E9EB983188460C500111188 /* firstDayDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9EB982188460C500111188 /* firstDayDemoTests.m */; };
+		3E9EB98E18848C2500111188 /* MMRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9EB98D18848C2500111188 /* MMRDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		3E9EB97E188460C500111188 /* firstDayDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "firstDayDemoTests-Info.plist"; sourceTree = "<group>"; };
 		3E9EB980188460C500111188 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3E9EB982188460C500111188 /* firstDayDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = firstDayDemoTests.m; sourceTree = "<group>"; };
+		3E9EB98C18848C2500111188 /* MMRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMRDetailViewController.h; sourceTree = "<group>"; };
+		3E9EB98D18848C2500111188 /* MMRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMRDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				3E9EB969188460C500111188 /* Main.storyboard */,
 				3E9EB96C188460C500111188 /* MMRViewController.h */,
 				3E9EB96D188460C500111188 /* MMRViewController.m */,
+				3E9EB98C18848C2500111188 /* MMRDetailViewController.h */,
+				3E9EB98D18848C2500111188 /* MMRDetailViewController.m */,
 				3E9EB96F188460C500111188 /* Images.xcassets */,
 				3E9EB95E188460C500111188 /* Supporting Files */,
 			);
@@ -252,6 +257,7 @@
 			files = (
 				3E9EB964188460C500111188 /* main.m in Sources */,
 				3E9EB968188460C500111188 /* MMRAppDelegate.m in Sources */,
+				3E9EB98E18848C2500111188 /* MMRDetailViewController.m in Sources */,
 				3E9EB96E188460C500111188 /* MMRViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
