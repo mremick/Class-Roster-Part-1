@@ -10,4 +10,7 @@
 
 @interface MMRViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITableView *myTableview;
+
+
 @end
