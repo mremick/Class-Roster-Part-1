@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMRStudent.h"
 
-@interface MMRDetailViewController : UIViewController
+@protocol MMRDetailViewControllerDelegate <NSObject>
 
-@property (strong,nonatomic) NSString *name;
+- (void)studentWasUpdated:(MMRStudent *)student;
+
+@end
+
+@interface MMRDetailViewController : UIViewController <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
+
+//@property (strong,nonatomic) NSString *name;
+@property (nonatomic, weak) MMRStudent *student;
+
+@property (unsafe_unretained) id<MMRDetailViewControllerDelegate> delegate;
 
 @end

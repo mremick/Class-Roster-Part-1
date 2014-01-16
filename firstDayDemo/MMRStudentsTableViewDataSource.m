@@ -26,8 +26,17 @@
     
     cell.textLabel.text = student.name;
     
-    NSLog(@"cell for row");
+    if (student.image) {
+        cell.imageView.layer.cornerRadius = cell.imageView.layer.bounds.size.height/2;
+        cell.imageView.layer.masksToBounds = YES;
+        cell.imageView.image = student.image;
+        
+    }
     
+    else {
+        cell.imageView.image = nil;
+    }
+        
     return cell;
 }
 
@@ -38,11 +47,33 @@
     
     self.students = [NSMutableArray array];
     
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    
     for (NSDictionary *aStudent in studentsFromPlist) {
         MMRStudent *student = [[MMRStudent alloc] initWithName:[aStudent objectForKey:@"name"]];
+        
+        NSString *studentsNameString = [NSString stringWithFormat:@"%@.png",[aStudent objectForKey:@"name"]];
+
+        
+        if ([fileManager fileExistsAtPath:[[self documentsDirectoryPath] stringByAppendingString:studentsNameString]]) {
+            NSData *photoData = [fileManager contentsAtPath:[[self documentsDirectoryPath] stringByAppendingString:studentsNameString]];
+            UIImage *imageFromData = [UIImage imageWithData:photoData];
+            
+            student.image = imageFromData; 
+        }
+        
         [self.students addObject:student];
+        
     }
     
+}
+
+-(NSString *)documentsDirectoryPath
+{
+    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentationDirectory
+                                                                  inDomains:NSUserDomainMask]lastObject];
+    return [documentsURL path];
 }
 
 @end

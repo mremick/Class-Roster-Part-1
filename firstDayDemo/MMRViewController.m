@@ -11,7 +11,7 @@
 #import "MMRStudent.h"
 #import "MMRStudentsTableViewDataSource.h"
 
-@interface MMRViewController () <UITableViewDelegate,UIActionSheetDelegate>
+@interface MMRViewController () <UITableViewDelegate,UIActionSheetDelegate,MMRDetailViewControllerDelegate>
 @property (strong,nonatomic) UIRefreshControl *refreshControl;
 @property (strong,nonatomic) MMRStudentsTableViewDataSource *tableViewDataSource;
 
@@ -29,12 +29,12 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.tableViewDataSource = [[MMRStudentsTableViewDataSource alloc] init];
 
+    [self.tableViewDataSource initStudents];
     
     self.myTableview.delegate = self;
     
     self.myTableview.dataSource = self.tableViewDataSource;
     
-    [self.tableViewDataSource initStudents];
     
     [self creatingRefreshControl];
     
@@ -92,8 +92,16 @@
         NSIndexPath *indexPath = [self.myTableview indexPathForSelectedRow];
         MMRDetailViewController *vc = (MMRDetailViewController *)segue.destinationViewController;
         MMRStudent *student = [self.tableViewDataSource.students objectAtIndex:indexPath.row];
-        vc.name = student.name;
+        vc.student = student;
+        vc.delegate = self;
     }
+}
+
+- (void)studentWasUpdated:(MMRStudent *)student
+{
+    NSIndexPath *updatedPath = [NSIndexPath indexPathForRow:[self.tableViewDataSource.students indexOfObject:student] inSection:0];
+    
+    [self.myTableview reloadRowsAtIndexPaths:@[updatedPath] withRowAnimation:UITableViewRowAnimationLeft];
 }
 
 @end
