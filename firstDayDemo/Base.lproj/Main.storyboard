@@ -73,19 +73,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VKg-ek-2zZ">
-                                <rect key="frame" x="40" y="96" width="240" height="240"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R45-kg-dne">
-                                <rect key="frame" x="137" y="399" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKk-8w-8Pc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VKg-ek-2zZ">
+                                        <rect key="frame" x="40" y="92" width="240" height="240"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="240" id="W8W-wa-qSz"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Twitter Account" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QzK-Ft-C11">
+                                        <rect key="frame" x="40" y="381" width="240" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="GitHub Account" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hjQ-qL-8mv">
+                                        <rect key="frame" x="40" y="427" width="240" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="VKg-ek-2zZ" secondAttribute="trailing" constant="40" id="2xf-rV-ss1"/>
+                                    <constraint firstItem="VKg-ek-2zZ" firstAttribute="centerX" secondItem="SKk-8w-8Pc" secondAttribute="centerX" id="RrI-Wt-Ice"/>
+                                    <constraint firstAttribute="bottom" secondItem="VKg-ek-2zZ" secondAttribute="bottom" constant="1000" id="ceL-eU-aiQ"/>
+                                    <constraint firstItem="VKg-ek-2zZ" firstAttribute="top" secondItem="SKk-8w-8Pc" secondAttribute="top" constant="92" id="jeb-Sc-XmT"/>
+                                    <constraint firstItem="VKg-ek-2zZ" firstAttribute="leading" secondItem="SKk-8w-8Pc" secondAttribute="leading" constant="40" id="lWJ-f3-sq1"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                        <constraints>
+                            <constraint firstItem="SKk-8w-8Pc" firstAttribute="leading" secondItem="nNL-eK-RAb" secondAttribute="leading" id="Wjz-AE-dDY"/>
+                            <constraint firstAttribute="trailing" secondItem="SKk-8w-8Pc" secondAttribute="trailing" id="Z3S-Uf-JBy"/>
+                            <constraint firstItem="SKk-8w-8Pc" firstAttribute="top" secondItem="nNL-eK-RAb" secondAttribute="top" id="rOf-Ai-kvA"/>
+                            <constraint firstAttribute="bottom" secondItem="SKk-8w-8Pc" secondAttribute="bottom" id="rYC-kd-mNJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="On3-nO-g8w">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="camera" id="sBz-5s-jtN">
@@ -95,7 +124,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="githubTextField" destination="hjQ-qL-8mv" id="ff0-um-VSt"/>
                         <outlet property="imageView" destination="VKg-ek-2zZ" id="ywK-Kp-Z1j"/>
+                        <outlet property="scrollView" destination="SKk-8w-8Pc" id="G7A-Du-nE1"/>
+                        <outlet property="twitterTextField" destination="QzK-Ft-C11" id="cs8-Gy-RGY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpO-lb-FGA" userLabel="First Responder" sceneMemberID="firstResponder"/>

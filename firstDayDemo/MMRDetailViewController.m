@@ -9,9 +9,20 @@
 #import "MMRDetailViewController.h"
 @import AssetsLibrary;
 
+static float viewWidth = 320.0;
+
+float redColor = 0;
+float greenColor = 0;
+float blueColor = 0;
+
 @interface MMRDetailViewController ()
 - (IBAction)cameraButtonPushed:(UIBarButtonItem *)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong,nonatomic) UIColor *backgroundColor;
+@property (strong,nonatomic) UIButton *applyButton;
+@property (weak, nonatomic) IBOutlet UITextField *twitterTextField;
+@property (weak, nonatomic) IBOutlet UITextField *githubTextField;
 
 @end
 
@@ -26,16 +37,119 @@
     return self;
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.scrollView.contentSize = CGSizeMake(1000, 1000);
     
+    self.twitterTextField.delegate = self;
+    self.githubTextField.delegate = self;
+    
+    CGFloat sliderY = 500;
+    
+    UISlider *slider;
+    
+    for (int i = 0; i < 3; i++) {
+        slider = [[UISlider alloc] initWithFrame:CGRectMake(50, sliderY, viewWidth - 100, 100)];
+        
+        [self.scrollView addSubview:slider];
+        
+        UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(viewWidth/2 - 20,sliderY - 2,viewWidth - 50,50)];
+        
+        switch (i) {
+            case 0:
+                colorLabel.text = @"Red";
+                colorLabel.textColor = [UIColor redColor];
+                break;
+            case 1:
+                colorLabel.text = @"Green";
+                colorLabel.textColor = [UIColor greenColor];
+                break;
+                
+            default:
+                colorLabel.text = @"Blue";
+                colorLabel.textColor = [UIColor blueColor];
+                break;
+        }
+        sliderY += 80;
+        
+        [self.scrollView addSubview:colorLabel];
+        
+        slider.tag = i;
+        [slider addTarget:self action:@selector(colorChanged:) forControlEvents:UIControlEventAllTouchEvents];
+    
+    }
+    
+    self.applyButton = [[UIButton alloc] initWithFrame:CGRectMake(0,0, viewWidth - 50, 60)];
+    self.applyButton.center = CGPointMake(self.view.center.x, sliderY + 75);
+    self.applyButton.backgroundColor = [UIColor grayColor];
+    self.applyButton.layer.cornerRadius = 20.0;
+    NSString *buttonTitle = [NSString stringWithFormat:@"Apply changes for %@",self.student.name];
+    [self.applyButton setTitle:buttonTitle forState:UIControlStateNormal];
+    self.applyButton.titleLabel.textColor = [UIColor blackColor];
+    
+    self.applyButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:22.0];
+    
+    [self.scrollView addSubview:self.applyButton];
+    
+    [self.applyButton addTarget:self action:@selector(buttonPushed) forControlEvents:UIControlEventTouchDown];
+    
+    NSLog(@"WIDTH:%f",self.view.bounds.size.width);
+    
+}
+
+- (void)colorChanged:(id)sender
+{
+    UISlider *tempSlider = (UISlider *)sender;
+    
+    
+    
+    switch (tempSlider.tag) {
+        case 0:
+            redColor = tempSlider.value;
+            break;
+        
+        case 1:
+            greenColor = tempSlider.value;
+            
+        default:
+            blueColor = tempSlider.value;
+            break;
+    }
+    
+    UIColor *backgroundColor = [UIColor colorWithRed:redColor green:greenColor blue:blueColor alpha:1.0];
+    
+    UIColor *buttonBackgroundColor = [UIColor colorWithRed:1 - redColor green:1 - greenColor blue:1 - blueColor alpha:1.0];
+    
+    self.view.backgroundColor = backgroundColor;
+    self.student.color = backgroundColor;
+    self.applyButton.backgroundColor = buttonBackgroundColor;
+    self.navigationController.navigationBar.tintColor = buttonBackgroundColor;
+}
+
+- (void)buttonPushed
+{
+    [self.delegate studentWasUpdated:self.student];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationItem.title = self.student.name;
+    
+    self.imageView.layer.cornerRadius = 120.0;
+    self.imageView.layer.masksToBounds = YES;
+    
+    if (!self.student.image) {
+        self.imageView.image = [UIImage imageNamed:@"smiley-face-clip-art_413110.jpg"];
+    }
+    
+    else {
+        self.imageView.image = self.student.image;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -164,9 +278,15 @@
             //
         }];
         
-        
-        
     }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.twitterTextField resignFirstResponder];
+    [self.githubTextField resignFirstResponder];
+    
+    return NO;
 }
 
 

@@ -24,13 +24,24 @@
     
     MMRStudent *student = [self.students objectAtIndex:indexPath.row];
     
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:18.0];
     cell.textLabel.text = student.name;
     
+    if (student.color) {
+        cell.backgroundColor = student.color;
+    }
+    
+    else {
+        cell.backgroundColor = [UIColor whiteColor];
+    }
+
+    
     if (student.image) {
-        cell.imageView.layer.cornerRadius = cell.imageView.layer.bounds.size.height/2;
-        cell.imageView.layer.masksToBounds = YES;
         cell.imageView.image = student.image;
-        
+        cell.imageView.layer.cornerRadius = 35;
+        cell.imageView.layer.masksToBounds = YES;
+        cell.imageView.backgroundColor = [UIColor blueColor];
+        NSLog(@"%f",cell.imageView.bounds.size.height);
     }
     
     else {
@@ -44,6 +55,7 @@
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Bootcamp" ofType:@"plist"];
     NSArray *studentsFromPlist = [[NSArray alloc] initWithContentsOfFile:plistPath];
+    
     
     self.students = [NSMutableArray array];
     

@@ -35,7 +35,6 @@
     
     self.myTableview.dataSource = self.tableViewDataSource;
     
-    
     [self creatingRefreshControl];
     
 }

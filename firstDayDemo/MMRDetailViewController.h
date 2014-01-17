@@ -15,7 +15,7 @@
 
 @end
 
-@interface MMRDetailViewController : UIViewController <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
+@interface MMRDetailViewController : UIViewController <UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIAlertViewDelegate,UITextFieldDelegate>
 
 //@property (strong,nonatomic) NSString *name;
 @property (nonatomic, weak) MMRStudent *student;

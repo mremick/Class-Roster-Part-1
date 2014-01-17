@@ -12,6 +12,7 @@
 
 @property (strong,nonatomic) NSString *name;
 @property (strong,nonatomic) UIImage *image;
+@property (strong,nonatomic) UIColor *color;
 
 - (instancetype)initWithName:(NSString *)name;
 
